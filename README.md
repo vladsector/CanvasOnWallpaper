@@ -1,5 +1,7 @@
 # Spotify Canvas on Wallpaper
 
+> **Note**: When you first launch the app, you will see a black screen. This is normal. 
+
 An innovative Android application that transforms your home screen into a dynamic canvas by streaming official Spotify Canvas video loops in real-time.
 
 > *If you’d like to contribute to the project and help me keep the lights on, donations are much appreciated.*
@@ -57,3 +59,17 @@ The server returns a JSON with a direct link to the `.mp4` loop file.
 
 ---
 *Designed for music lovers who value aesthetics and technology.*
+
+---
+
+## Getting Started
+
+Once you start playing music in Spotify, the app will automatically detect the track and instantly pick up the **Canvas**. If the song doesn't have a Canvas, the app will display the **album art** instead.
+
+Glad you got it working!
+
+## Acknowledgments
+
+A huge thank you to [Paxsenix0/Spotify-Canvas-API](https://github.com/Paxsenix0/Spotify-Canvas-API) — this project wouldn't have been possible without it.
+
+---
