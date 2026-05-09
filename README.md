@@ -1,51 +1,51 @@
 # Spotify Canvas on Wallpaper
 
-Инновационное Android-приложение, которое превращает ваш рабочий стол в динамическое полотно, транслируя официальные видео-заставки (Canvas) из Spotify в реальном времени.
+An innovative Android application that transforms your home screen into a dynamic canvas by streaming official Spotify Canvas video loops in real-time.
 
-## 🚀 Основные возможности
+## 🚀 Key Features
 
-*   **Canvas на рабочем столе**: Автоматическая установка видео-заставки текущего трека Spotify в качестве живых обоев.
-*   **Умный Fallback**: Если у трека нет Canvas-видео, приложение автоматически подтягивает обложку альбома напрямую из плеера Spotify.
-*   **Высококачественные эффекты**: 
-    *   **Gaussian Blur**: Реалистичное размытие по Гауссу (7x7 сетка) для создания глубокого атмосферного фона.
-    *   **Smooth Transitions**: Плавные переходы между треками через эффекты Fade (затухание) и Blur (размытие).
-*   **Полная кастомизация**: Отдельные настройки яркости и интенсивности размытия для видео и статических обложек.
-*   **Два способа авторизации**:
-    *   Безопасный вход через официальную страницу Spotify.
-    *   Ручной ввод токена `sp_dc` для максимальной приватности.
-*   **Энергоэффективность**: Весь рендеринг перенесен на GPU (OpenGL ES 2.0), что минимизирует нагрузку на процессор и аккумулятор.
+*   **Canvas on Home Screen**: Automatically sets the current Spotify track's video loop as your live wallpaper.
+*   **Smart Fallback**: If a track doesn't have a Canvas video, the app automatically fetches the album art directly from the Spotify player.
+*   **High-Quality Effects**: 
+    *   **Gaussian Blur**: Realistic Gaussian blur (7x7 grid) for creating a deep, atmospheric background.
+    *   **Smooth Transitions**: Seamless transitions between tracks using Fade and Blur effects.
+*   **Full Customization**: Independent brightness and blur intensity settings for both video and static covers.
+*   **Dual Authentication Methods**:
+    *   Secure login via the official Spotify account page.
+    *   Manual `sp_dc` token entry for maximum privacy.
+*   **Energy Efficient**: All rendering is handled by the GPU (OpenGL ES 2.0), minimizing CPU and battery load.
 
-## 🛠 Принцип работы
+## 🛠 How It Works
 
-### 1. Отслеживание (Background Service)
-Приложение использует `SpotifyNotificationService` (на базе `NotificationListenerService`), который:
-*   Подключается к активной медиа-сессии Spotify.
-*   Мгновенно реагирует на смену трека через системные колбэки.
-*   Извлекает уникальный `Track ID` и метаданные (название, артист, обложка).
+### 1. Tracking (Background Service)
+The app uses `SpotifyNotificationService` (based on `NotificationListenerService`), which:
+*   Connects to Spotify's active media session.
+*   Reacts instantly to track changes via system callbacks.
+*   Extracts the unique `Track ID` and metadata (title, artist, cover).
 
-### 2. Получение контента (API)
-Как только трек меняется, сервис отправляет асинхронный запрос на сервер:
+### 2. Content Retrieval (API)
+As soon as a track changes, the service sends an asynchronous request to the server:
 `http://95.85.245.174:3000/api/canvas?trackId=[ID]&sp_dc=[TOKEN]`
-Сервер возвращает JSON с прямой ссылкой на `.mp4` файл заставки.
+The server returns a JSON with a direct link to the `.mp4` loop file.
 
-### 3. Рендеринг (Live Wallpaper Engine)
-`CanvasWallpaperService` управляет отображением:
-*   **Видео**: Использует `MediaPlayer` интегрированный с OpenGL текстурой (`SurfaceTexture`).
-*   **Обложки**: Если видео нет, загружает обложку из кэша Spotify и отрисовывает её через аппаратный Canvas.
-*   **Шейдеры**: Специальный фрагментный шейдер обрабатывает каждый кадр "на лету", применяя настройки яркости и размытия по Гауссу.
+### 3. Rendering (Live Wallpaper Engine)
+`CanvasWallpaperService` manages the display:
+*   **Video**: Uses `MediaPlayer` integrated with an OpenGL texture (`SurfaceTexture`).
+*   **Covers**: If no video is available, it loads the album art from the Spotify cache and renders it using Hardware Canvas.
+*   **Shaders**: A custom fragment shader processes each frame on-the-fly, applying brightness and Gaussian blur settings.
 
-## 📱 Интерфейс
-*   **Onboarding**: Удобный процесс первого запуска с окнами приветствия и пошаговым получением разрешений.
-*   **Main Screen**: Отображение текущего трека, артиста и быстрый доступ к настройкам.
-*   **Settings**: Полный контроль над визуальным стилем заставки.
-*   **Debug Tool**: Прозрачная информация о текущих токенах, ссылках и "сырых" ответах сервера для полной уверенности в работе системы.
+## 📱 Interface
+*   **Onboarding**: Smooth first-run process with welcome screens and step-by-step permission handling.
+*   **Main Screen**: Displays the current track, artist, and quick access to settings.
+*   **Settings**: Full control over the visual style of the wallpaper.
+*   **Debug Tool**: Transparent information about current tokens, links, and raw server responses for complete system confidence.
 
-## 🔧 Технический стек
-*   **Язык**: Kotlin
-*   **Графика**: OpenGL ES 2.0 + GLSL (шейдеры)
-*   **Анимация**: ValueAnimator API
-*   **Сеть**: HttpURLConnection + Coroutines (IO Dispatcher)
-*   **Дизайн**: Material Design 3 (M3)
+## 🔧 Technical Stack
+*   **Language**: Kotlin
+*   **Graphics**: OpenGL ES 2.0 + GLSL (Shaders)
+*   **Animation**: ValueAnimator API
+*   **Networking**: HttpURLConnection + Coroutines (IO Dispatcher)
+*   **Design**: Material Design 3 (M3)
 
 ---
-*Разработано для любителей музыки, которые ценят эстетику и технологичность.*
+*Designed for music lovers who value aesthetics and technology.*
