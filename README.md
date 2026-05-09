@@ -10,8 +10,6 @@ An innovative Android application that transforms your home screen into a dynami
 
 Once you start playing music in Spotify, the app will automatically detect the track and instantly pick up the **Canvas**. If the song doesn't have a Canvas, the app will display the **album art** instead.
 
-Glad you got it working!
-
 ## Acknowledgments
 
 A huge thank you to [Paxsenix0/Spotify-Canvas-API](https://github.com/Paxsenix0/Spotify-Canvas-API) — this project wouldn't have been possible without it.
