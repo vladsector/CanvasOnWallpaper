@@ -44,7 +44,7 @@ The app uses `SpotifyNotificationService` (based on `NotificationListenerService
 *   Reacts instantly to track changes via system callbacks.
 *   Extracts the unique `Track ID` and metadata (title, artist, cover).
 
-### 2. Content Retrieval (API)
+### 2. Content Retrieval ([Spotify-Canvas-API](https://github.com/vladsector/Spotify-Canvas-API)) 
 As soon as a track changes, the service sends an asynchronous request to the server:
 `http://95.85.245.174:3000/api/canvas?trackId=[ID]&sp_dc=[TOKEN]`
 The server returns a JSON with a direct link to the `.mp4` loop file.
