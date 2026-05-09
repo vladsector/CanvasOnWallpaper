@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_background"
+    tools:context=".MainActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spotify Canvas"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="32dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/surface_variant"
+                app:strokeWidth="0dp"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Currently Playing"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="12sp"
+                        android:textAllCaps="true"
+                        android:letterSpacing="0.1" />
+
+                    <TextView
+                        android:id="@+id/trackInfoTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Not playing"
+                        android:textColor="@color/spotify_green"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/trackIdTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="ID: None"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="12sp"
+                        android:fontFamily="monospace" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/setWallpaperButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="Set Live Wallpaper"
+                android:textColor="@color/on_primary"
+                app:cornerRadius="32dp"
+                android:layout_marginBottom="12dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                style="@style/Widget.Material3.Button" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/settingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="Wallpaper Settings"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/surface_variant"
+                app:cornerRadius="32dp"
+                android:layout_marginBottom="12dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                style="@style/Widget.Material3.Button.TonalButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/debugButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="Debug Details"
+                android:textColor="@color/on_surface_variant"
+                app:backgroundTint="@android:color/transparent"
+                app:strokeColor="@color/surface_variant"
+                app:strokeWidth="1dp"
+                app:cornerRadius="32dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to\nCanvas Wallpaper!"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="48dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/loginSpotifyButton"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="Login to Spotify"
+            app:cornerRadius="32dp"
+            app:iconGravity="textEnd"
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.Material3.Button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="12sp"
+            android:layout_marginBottom="16dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/manualTokenLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Paste sp_dc token here"
+            android:layout_marginBottom="8dp"
+            app:boxBackgroundColor="@color/surface_variant"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusBottomEnd="16dp"
+            style="@style/Widget.Material3.TextInputLayout.FilledBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/manualTokenInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:inputType="textLongMessage" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/applyTokenButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Apply Token"
+            app:cornerRadius="28dp"
+            app:iconGravity="textEnd"
+            app:backgroundTint="@color/surface_variant"
+            android:textColor="@color/white"
+            android:layout_marginBottom="32dp"
+            style="@style/Widget.Material3.Button.TonalButton" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nextButton"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="Next"
+            android:visibility="gone"
+            app:cornerRadius="32dp"
+            style="@style/Widget.Material3.Button" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

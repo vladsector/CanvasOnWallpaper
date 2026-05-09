@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/backup_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="Spotify Canvas"
+        android:theme="@style/Theme.CanvasOnWallpaper"
+        android:usesCleartextTraffic="true"
+        tools:ignore="MissingLibraries">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CanvasOnWallpaper" />
+
+        <activity
+            android:name=".PermissionsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CanvasOnWallpaper" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="Wallpaper Settings"
+            android:theme="@style/Theme.CanvasOnWallpaper" />
+
+        <activity
+            android:name=".DebugActivity"
+            android:exported="false"
+            android:label="Debug Info"
+            android:theme="@style/Theme.CanvasOnWallpaper" />
+
+        <activity
+            android:name=".AuthActivity"
+            android:exported="true" />
+
+        <service
+            android:name=".SpotifyNotificationService"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".CanvasWallpaperService"
+            android:exported="true"
+            android:label="Spotify Canvas Wallpaper"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/wallpaper" />
+        </service>
+
+    </application>
+</manifest>
