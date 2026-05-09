@@ -1,6 +1,6 @@
 # Spotify Canvas on Wallpaper
 
-> **Note**: When you first launch the app, you will see a black screen. This is normal. 
+> **Note**: When you first launch the app, you will see a black screen on background. This is normal. 
 
 An innovative Android application that transforms your home screen into a dynamic canvas by streaming official Spotify Canvas video loops in real-time.
 
