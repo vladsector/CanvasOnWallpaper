@@ -3,8 +3,11 @@
 An innovative Android application that transforms your home screen into a dynamic canvas by streaming official Spotify Canvas video loops in real-time.
 
 *If you’d like to contribute to the project and help me keep the lights on, donations are much appreciated.*
+
 *USDT: TF6ZXJEU25V2Xu7uZGFHKQjDWoStkaMvyy*
+
 *BTC: bc1q6da5claezrt2kw7wj645nz23d007ml2fdagu98*
+
 *ETH: 0x05b2b76f82a8f6776b57b8933272b4c4be271903*
 
 ## 🚀 Key Features
