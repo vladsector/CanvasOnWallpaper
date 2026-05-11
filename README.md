@@ -1,6 +1,27 @@
 # Spotify Canvas on Wallpaper
 
-An innovative Android application that transforms your home screen into a dynamic canvas by streaming official Spotify Canvas video loops in real-time.
+> **Note**: When you first launch the app, you will see a black screen on background. This is normal. 
+
+---
+
+## Getting Started
+
+Once you start playing music in Spotify, the app will automatically detect the track and instantly pick up the **Canvas**. If the song doesn't have a Canvas, the app will display the **album art** instead.
+
+## Acknowledgments
+
+A huge thank you to [Paxsenix0/Spotify-Canvas-API](https://github.com/Paxsenix0/Spotify-Canvas-API) — this project wouldn't have been possible without it.
+
+---
+
+
+> *If you’d like to contribute to the project and help me keep the lights on, donations are much appreciated.*
+
+> *USDT: TF6ZXJEU25V2Xu7uZGFHKQjDWoStkaMvyy*
+
+> *BTC: bc1q6da5claezrt2kw7wj645nz23d007ml2fdagu98*
+
+> *ETH: 0x05b2b76f82a8f6776b57b8933272b4c4be271903*
 
 ## 🚀 Key Features
 
@@ -23,7 +44,7 @@ The app uses `SpotifyNotificationService` (based on `NotificationListenerService
 *   Reacts instantly to track changes via system callbacks.
 *   Extracts the unique `Track ID` and metadata (title, artist, cover).
 
-### 2. Content Retrieval (API)
+### 2. Content Retrieval ([Spotify-Canvas-API](https://github.com/vladsector/Spotify-Canvas-API)) 
 As soon as a track changes, the service sends an asynchronous request to the server:
 `http://95.85.245.174:3000/api/canvas?trackId=[ID]&sp_dc=[TOKEN]`
 The server returns a JSON with a direct link to the `.mp4` loop file.
@@ -49,3 +70,4 @@ The server returns a JSON with a direct link to the `.mp4` loop file.
 
 ---
 *Designed for music lovers who value aesthetics and technology.*
+

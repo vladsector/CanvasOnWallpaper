@@ -4,6 +4,7 @@ import android.content.ComponentName
 import android.media.MediaMetadata
 import android.media.session.MediaController
 import android.media.session.MediaSessionManager
+import android.media.session.PlaybackState
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
@@ -23,26 +24,33 @@ class SpotifyNotificationService : NotificationListenerService() {
 
     companion object {
         private val listeners = CopyOnWriteArraySet<(String, String) -> Unit>()
-        
+        private val playbackListeners = CopyOnWriteArraySet<(Boolean) -> Unit>()
+
         fun addUrlListener(listener: (String, String) -> Unit) {
             listeners.add(listener)
         }
-        
+
         fun removeUrlListener(listener: (String, String) -> Unit) {
             listeners.remove(listener)
         }
 
+        fun addPlaybackListener(l: (Boolean) -> Unit) = playbackListeners.add(l)
+        fun removePlaybackListener(l: (Boolean) -> Unit) = playbackListeners.remove(l)
+
         private fun notifyDataUpdated(url: String, rawJson: String) {
             listeners.forEach { it.invoke(url, rawJson) }
+        }
+
+        private fun notifyPlaybackChanged(isPlaying: Boolean) {
+            playbackListeners.forEach { it.invoke(isPlaying) }
         }
     }
 
     private val sessionCallback = object : MediaController.Callback() {
         override fun onMetadataChanged(metadata: MediaMetadata?) {
-            // Извлекаем обложку напрямую из плеера Spotify
-            val albumArt = metadata?.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART) 
-                        ?: metadata?.getBitmap(MediaMetadata.METADATA_KEY_ART)
-            
+            val albumArt = metadata?.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART)
+                ?: metadata?.getBitmap(MediaMetadata.METADATA_KEY_ART)
+
             if (albumArt != null) {
                 saveAlbumArt(albumArt)
             }
@@ -56,10 +64,14 @@ class SpotifyNotificationService : NotificationListenerService() {
                 }
             }
         }
+
+        override fun onPlaybackStateChanged(state: PlaybackState?) {
+            val isPlaying = state?.state == PlaybackState.STATE_PLAYING
+            notifyPlaybackChanged(isPlaying)
+        }
     }
 
     private fun saveAlbumArt(bitmap: android.graphics.Bitmap) {
-        // Сохраняем битмап во временный файл, чтобы передать между процессами через путь
         serviceScope.launch {
             try {
                 val file = java.io.File(cacheDir, "spotify_art.jpg")
@@ -101,6 +113,9 @@ class SpotifyNotificationService : NotificationListenerService() {
             activeController = spotifySession
             activeController?.registerCallback(sessionCallback)
             sessionCallback.onMetadataChanged(activeController?.metadata)
+
+            val isPlaying = activeController?.playbackState?.state == PlaybackState.STATE_PLAYING
+            notifyPlaybackChanged(isPlaying)
         }
     }
 
@@ -114,8 +129,6 @@ class SpotifyNotificationService : NotificationListenerService() {
             try {
                 val sp = getSharedPreferences("prefs", MODE_PRIVATE)
                 val spDc = sp.getString("sp_dc", "") ?: ""
-                
-                // Обновленный формат запроса с токеном
                 val url = URL("http://95.85.245.174:3000/api/canvas?trackId=$trackId&sp_dc=$spDc")
 
                 connection = (url.openConnection() as HttpURLConnection).apply {
@@ -131,17 +144,17 @@ class SpotifyNotificationService : NotificationListenerService() {
                     connection.errorStream?.bufferedReader()?.use { it.readText() } ?: "Error $responseCode"
                 }
 
-                getSharedPreferences("prefs", MODE_PRIVATE).edit { 
-                    putString("last_raw_json", responseText) 
+                getSharedPreferences("prefs", MODE_PRIVATE).edit {
+                    putString("last_raw_json", responseText)
                 }
 
                 val canvasUrl = parseCanvasUrl(responseText)
-                
+
                 getSharedPreferences("prefs", MODE_PRIVATE).edit {
                     putString("last_canvas_url", canvasUrl)
                 }
 
-                withContext(Dispatchers.Main) { 
+                withContext(Dispatchers.Main) {
                     val signal = canvasUrl ?: "ALBUM_ART"
                     notifyDataUpdated(signal, responseText)
                 }
